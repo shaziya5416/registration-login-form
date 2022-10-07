@@ -1,3 +1,5 @@
+
+
 const mongoose = require("mongoose");
 
 const employeeSchema = new mongoose.Schema({
@@ -28,6 +30,10 @@ const employeeSchema = new mongoose.Schema({
         required: true
     },
     gender : {
+        type: String , 
+        required: true
+    },
+    role : {
         type: String , 
         required: true
     }

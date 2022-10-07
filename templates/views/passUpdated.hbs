@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 25px;
+}
+.contain{
+        width: 80%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: #333;
+        padding: 10px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }    
+    /* Some more styles to beutify this example */
+    nav a{
+        color: #fff;
+        text-decoration: none;
+        padding: 7px 25px;
+        display: inline-block;
+        float:right;
+    }
+    .contain p{
+        line-height: 200px; /* Create scrollbar to test positioning */
+    }
+::selection{
+  background: #4158d0;
+  color: #fff;
+}
+    </style>
+</head>
+<body>
+    <div class="fixed-header">
+        <div class="contain">
+            <nav>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </nav>
+        </div>
+    </div>
+     <h1>Wohooo! Password updated 💥</h1>
+</body>
+</html>

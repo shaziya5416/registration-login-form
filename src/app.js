@@ -7,7 +7,7 @@ const app = express();
 const File = require("./models/user_registration");
 const {json} =  require('express');
 
-const port = process.env.PORT || 49152;
+const port = process.env.PORT || 3000;
 
 const static_path = path.join(__dirname , '../public');
 const templates_path = path.join(__dirname , '../templates/views');
@@ -32,12 +32,12 @@ app.set("views" , templates_path);
 hbs.registerPartials(partials_path);
 
 app.get("/" , (req , res)=>{
-    res.render("index");
+    res.render("login");
 });
 
-app.get('/home' , (req , res)=>{
-    res.render("home");
-})
+// app.get('/home' , (req , res)=>{
+//     res.render("home");
+// })
 
 app.get('/login' , (req , res)=>{
     res.render("login");
@@ -47,9 +47,14 @@ app.get('/register' , (req , res)=>{
     res.render("register");
 })
 
+app.get('/usersList',async(req,res)=>{
+    const allUsers=await File.find()
+    res.render("usersList",{allUsers})
+})
 //create a new user in our database
 // req.body.password; password will be name attribute value
 app.post("/register" , async (req , res)=>{
+    console.log(req.body,"Registration");
     try{
         const password = req.body.password;
         const con_password = req.body.confirmpassword;
@@ -63,12 +68,12 @@ app.post("/register" , async (req , res)=>{
                 password : req.body.password,
                 confirmpassword : req.body.confirmpassword,
                 gender : req.body.gender,
-
+                role:req.body.role
             });
             const registered = await registerEmployee.save();
-            res.status(201).render("home");
+            res.status(201).render("login");
         }else{
-            res.send("Passwords are not matching");
+            res.render("notMatching");
         }
         //console.log(req.body.firstname);
     }catch(error){
@@ -82,23 +87,30 @@ app.post("/login" , async(req , res)=>{
         const email = req.body.email;
         const password = req.body.password;
         const useremail = await File.findOne({email : email});
-        if(useremail.password === password){
-                res.render("home");
+        console.log(useremail,"Login data");
+        const role=useremail.role;
+        if (useremail.password === password){ // add admin condition
+        if(role==="Admin"){
+          res.render("adminloggedin")
         }
         else{
-            res.send("Invalid Email Or Password");
+            res.render("loggedin")
+        }
+    }
+        else{
+            res.render("invalidPass");
         }
     }catch(err){
-        res.status(400).send("Invalid Email Or Password");
+        res.status(400).render("invalidPass");
     }
 })
 
 //forget Password
 app.get("/forgetPassword" , (req , res)=>{
     try{
-       res.render("forgetPassword.hbs");
+       res.render("forgetPassword");
     }catch(err){
-        res.status(400).send("Invalid Email Or Password");
+        res.status(400).render("invalidPass");
     }
 })
 
@@ -111,14 +123,14 @@ app.post("/forgetPassword" , async (req , res)=>{
             const useremail = await File.findOne({email : email});
             if(useremail){
                 const updation = await File.updateOne({email:email} ,{$set : {password:password , confirmpassword:confirmpassword}});
-                res.send("Password Updated");
+                res.render("passUpdated");
             }
             else{
-                res.send("Email not registered");
+                res.render("emailNotRegister");
             }
         }
         else{
-            res.send("Password not match");
+            res.render("notMatching");
         }
     }catch(err){
         res.status(400).send("Invalid Email Or Password");

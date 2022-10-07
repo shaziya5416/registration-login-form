@@ -21,6 +21,34 @@ body{
   padding: 10px;
   margin-top: 25px;
 }
+.contain{
+        width: 80%;
+        margin: 0 auto; /* Center the DIV horizontally */
+    }
+    .fixed-header, .fixed-footer{
+        width: 100%;
+        position: fixed;        
+        background: #333;
+        padding: 10px 0;
+        color: #fff;
+    }
+    .fixed-header{
+        top: 0;
+    }
+    .fixed-footer{
+        bottom: 0;
+    }    
+    /* Some more styles to beutify this example */
+    nav a{
+        color: #fff;
+        text-decoration: none;
+        padding: 7px 25px;
+        display: inline-block;
+        float:right;
+    }
+    .contain p{
+        line-height: 200px; /* Create scrollbar to test positioning */
+    }
 .container{
   max-width: 700px;
   margin-right: 50px;
@@ -78,6 +106,10 @@ form .input-box span.details{
   font-size: 20px;
   font-weight: 500;
  }
+ form .role-details .role-title{
+  font-size: 20px;
+  font-weight: 500;
+ }
  form .category{
    display: flex;
    width: 80%;
@@ -101,6 +133,12 @@ form .input-box span.details{
  #dot-1:checked ~ .category label .one,
  #dot-2:checked ~ .category label .two,
  #dot-3:checked ~ .category label .three{
+   background: #9b59b6;
+   border-color: #d9d9d9;
+ }
+ #dot-4:checked ~ .category label .four,
+ #dot-5:checked ~ .category label .five,
+ #dot-6:checked ~ .category label .six{
    background: #9b59b6;
    border-color: #d9d9d9;
  }
@@ -156,6 +194,14 @@ form .user-details .input-box{
 	</style>
 </head>
 <body>
+  <div class="fixed-header">
+        <div class="contain">
+            <nav>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </nav>
+        </div>
+    </div>
 	<div class="container">
     <div class="title">Registration</div>
     <div class="content">
@@ -187,9 +233,9 @@ form .user-details .input-box{
           </div>
         </div>
         <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
+          <input type="radio" name="gender" id="dot-1" value="Male">
+          <input type="radio" name="gender" id="dot-2" value="Female">
+          <input type="radio" name="gender" id="dot-3" value="Prefer not to say">
           <span class="gender-title">Gender</span>
           <div class="category">
             <label for="dot-1">
@@ -203,6 +249,26 @@ form .user-details .input-box{
           <label for="dot-3">
             <span class="dot three"></span>
             <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <div class="role-details">
+          <input type="radio" name="role" id="dot-4" value ="Admin">
+          <input type="radio" name="role" id="dot-5" value="Sales">
+          <input type="radio" name="role" id="dot-6" value="Operations">
+          <span class="role-title">Role</span>
+          <div class="category">
+            <label for="dot-4">
+            <span class="dot four"></span>
+            <span class="role">Admin</span>
+          </label>
+          <label for="dot-5">
+            <span class="dot five"></span>
+            <span class="role">Sales</span>
+          </label>
+          <label for="dot-6">
+            <span class="dot six"></span>
+            <span class="role">Operations</span>
             </label>
           </div>
         </div>
