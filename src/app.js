@@ -7,7 +7,7 @@ const app = express();
 const File = require("./models/user_registration");
 const {json} =  require('express');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const static_path = path.join(__dirname , '../public');
 const templates_path = path.join(__dirname , '../templates/views');
